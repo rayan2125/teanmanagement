@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import React, { useState } from 'react';
 import Header from '../../components/header';
 import { colors } from '../../constants/colors';
@@ -7,9 +7,13 @@ import CustomBtn from '../../components/customBtn';
 import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { db } from '../../firebase/firebaseconfig';
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { useSelector } from 'react-redux';
 
 
 const CreateTeam = () => {
+    const userImg = useSelector(state => state.auth.userImg);
+    const authData = useSelector(state => state.auth.adduser)
+    // console.log(userImg, authData.name)
     const [captain, setCaptain] = useState(null);
     const [players, setPlayers] = useState([
         { id: 1, value: '', role: 'player' },
@@ -18,7 +22,7 @@ const CreateTeam = () => {
         { id: 4, value: '', role: 'player' },
     ]);
     const [teamName, setTeamName] = useState('')
-    console.log(teamName)
+
     const handleCaptain = (index) => {
         const updatedPlayers = players.map((player, i) => ({
             ...player,
@@ -59,15 +63,13 @@ const CreateTeam = () => {
 
     const handleSubmit = async (teamName, players) => {
         try {
-            
 
             await addDoc(collection(db, "teams"), {
-
                 teamName,
                 players
 
             })
-            console.log('User added!');
+
 
 
         } catch (error) {
@@ -99,6 +101,25 @@ const CreateTeam = () => {
                                 </View>
 
                                 {/* Dynamic Player Inputs */}
+                                <Text>Player 1</Text>
+                                <View style={{ borderColor: '#ccc', borderWidth: 1.5, marginTop: 15, marginBottom: 10, borderRadius: 10, paddingHorizontal: 5, paddingVertical: 5 }}>
+                                    <View style={{ flexDirection: 'row', position: 'relative' }}>
+
+                                        <View>
+
+                                            <Image source={{ uri: userImg }} style={{ height: 50, width: 50, borderRadius: 5, resizeMode: 'cover' }} />
+                                            <View style={{ backgroundColor: colors.redbtn, height: 15, width: 15, borderRadius: 100, alignItems: 'center',justifyContent:'center', position: 'absolute', top: -5, right: -5 }}>
+                                                <Text style={{ color: colors.white }}>C</Text>
+                                            </View>
+                                        </View>
+                                        <View style={{ marginHorizontal: 10 }}>
+                                            <Text style={{ fontSize: 18, fontWeight: '500', marginBottom: 10 }}>Dhanajay Dubey (You)</Text>
+                                            <Text>@dhanajayDubey</Text>
+
+                                        </View>
+                                    </View>
+
+                                </View>
                                 {players.map((player, index) => (
                                     <View key={player.id} style={styles.playerContainer}>
                                         <View style={styles.playerHeader}>
@@ -120,7 +141,10 @@ const CreateTeam = () => {
                                             placeholder="Enter @Username/Phone/Email"
                                             value={player.value}
                                             onChangeText={(text) => handleInputChange(index, text)}
+
+
                                         />
+
                                         {players.length > 4 && (
                                             <TouchableOpacity onPress={() => removePlayerInput(index)} style={styles.removeBtn}>
                                                 <MaterialIcons name="delete" size={24} color="red" />

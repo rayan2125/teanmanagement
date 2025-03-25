@@ -32,6 +32,22 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+<string>We need access to your camera for capturing photos.</string>
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>We need access to your photo library to upload images.</string>
+
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>We need access to your photo library to save images.</string>
+
+<key>LSSupportsOpeningDocumentsInPlace</key>
+<true/>
+
+<key>UIFileSharingEnabled</key>
+<true/>
+
+
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>

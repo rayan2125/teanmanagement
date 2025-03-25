@@ -40,7 +40,10 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
-./src/firebase
+src/firebase/firebaseConfig.js
+android/app/google-services.json
+ios/GoogleService-Info.plist
+
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the

@@ -24,6 +24,7 @@ const Profile = () => {
         // dispatch(logout(null))
         navigation.navigate("Login")
     }
+    
     return (
         <SafeAreaView style={{ flex: 1 }}>
 
