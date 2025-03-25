@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "368915910530",
+    "project_id": "playtplus-879fd",
+    "storage_bucket": "playtplus-879fd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368915910530:android:ab32b43ce22ea3f438c99b",
+        "android_client_info": {
+          "package_name": "com.teammanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTbSImZvIBp6WA2y3boH-5uU_GAPu-b9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
