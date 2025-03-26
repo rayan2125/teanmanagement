@@ -4,7 +4,7 @@ import { colors } from "../constants/colors";
 
 
 
-const Teams = () => {
+const Teams = ({onPress}) => {
     return (
         <View style={{
             flexDirection: "column",
@@ -36,7 +36,9 @@ const Teams = () => {
             </View>
             <View style={styles.divider} />
             <View style={styles.panel}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                <TouchableOpacity 
+                onPress={onPress}
+                style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
 
                     <Text style={{ color: colors.text, fontSize: 16, fontWeight: '500' }}>Team Members:</Text>
                     {/* <Text style={{ color: colors.text, fontSize: 16, fontWeight: '500' }}>Team Members</Text> */}
@@ -47,7 +49,7 @@ const Teams = () => {
                             <Image source={require("../assets/logo-2.jpg")} style={{ height: 60, borderRadius: 20, width: 60, resizeMode: 'cover', }} />
                         </View>
                     </View>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );

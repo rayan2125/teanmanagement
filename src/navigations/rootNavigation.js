@@ -5,6 +5,8 @@ import Signup from "../screens/auth/signup";
 import Login from "../screens/auth/login";
 import Registration from "../screens/auth/registration";
 import Profile from "../screens/profile";
+import Invites from "../screens/invites";
+import TeamMembers from "../screens/teams/teamMembers";
 
 
 const Stack = createStackNavigator();
@@ -18,6 +20,8 @@ const RootNavigation = () => {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Registration" component={Registration} />
             <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="Invites" component={Invites}/>
+            <Stack.Screen name="TeamMembers" component={TeamMembers}/>
         </Stack.Navigator>
     )
 }

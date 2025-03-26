@@ -9,10 +9,11 @@ import { useNavigation } from '@react-navigation/native'
 
 const Registration = () => {
     const navigation = useNavigation();
-   
-    const handleNavigation=()=>{
-        navigation.navigate("CreateTeam")
+
+    const handleNavigation = (item) => {
+        navigation.navigate(item)
     }
+
     return (
         <>
             <Header />
@@ -21,7 +22,9 @@ const Registration = () => {
                     <View >
                         <Text style={{ fontSize: 24, marginTop: 20, fontWeight: '500', color: colors.text }}>Select your team</Text>
                         <View style={{ marginTop: 20, gap: 10 }}>
-                            <Teams />
+                            <Teams
+                            onPress={()=>handleNavigation("TeamMembers")}
+                            />
                             {/* <Teams /> */}
                         </View>
                         <View style={{
@@ -52,7 +55,7 @@ const Registration = () => {
                         </View>
                         <View style={{ alignItems: 'center', marginTop: 30 }}>
                             <TouchableOpacity
-                                onPress={() => handleNavigation()}
+                                onPress={() => handleNavigation("CreateTeam")}
                                 style={{ borderColor: colors.orgbtn, borderWidth: 1, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 30 }}>
                                 <Text style={{ fontSize: 18, color: colors.orgbtn, fontWeight: '500' }}>+   Create New Team</Text>
                             </TouchableOpacity>

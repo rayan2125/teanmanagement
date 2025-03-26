@@ -5,6 +5,8 @@ import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import { useNavigation } from '@react-navigation/native';
 import CustomBtn from '../components/customBtn';
 import { colors } from '../constants/colors';
+import { logout } from '../redux/Reducers/auth.redux';
+import { useDispatch } from 'react-redux';
 // import { Image } from 'native-base';
 // import CustomButton from '@/components/customButton';
 // import { Colors } from '@/constants/Colors';
@@ -12,7 +14,7 @@ import { colors } from '../constants/colors';
 // import { logout } from '@/redux/Reducers/profileReducers';
 
 const Profile = () => {
-    // const dispatch= useDispatch()
+    const dispatch= useDispatch()
     // const profileSelector = useSelector(state=>state?.profile?.authData?.user)
 
     const navigation = useNavigation();
@@ -21,10 +23,10 @@ const Profile = () => {
     };
 
     const handleLogout = () => {
-        // dispatch(logout(null))
+        dispatch(logout(null))
         navigation.navigate("Login")
     }
-    
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
 
@@ -61,7 +63,7 @@ const Profile = () => {
                 <CustomBtn
                     bg="#F75851"
                     title="Logout"
-                // onPress={()=>handleLogout()}
+                onPress={()=>handleLogout()}
                 />
             </View>
         </SafeAreaView>

@@ -13,7 +13,7 @@ import { colors } from '../../constants/colors';
 import CustomBtn from '../../components/customBtn';
 import { db } from '../../firebase/firebaseconfig';
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { setUser, setUserImg } from '../../redux/Reducers/auth.redux';
+import { logout, setUser, setUserImg } from '../../redux/Reducers/auth.redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
@@ -53,6 +53,7 @@ const Signup = () => {
     const [phone, setPhone] = useState('');
     const [status, setStatus] = useState('');
     const [errors, setErrors] = useState({});
+    console.log(!errors)
     const [openModal, setModal] = useState(false)
     const navigation = useNavigation();
     const handleNavigation = () => {
@@ -105,7 +106,7 @@ const Signup = () => {
     const handleSubmit = async () => {
 
         setErrors({});
-        setLoading(false)
+        setLoading(true)
         const formValues = { name, userName, email, phone };
 
         try {
@@ -119,11 +120,14 @@ const Signup = () => {
                     email,
                     phone,
                 })
-                let data = { name, email, phone }
-                console.log('User added!');
+                
+                let data = { name, email, phone, userName }
+
                 dispatch(setUser(data))
-                navigation.navigate("Home")
+                setLoading(false)
+                // navigation.navigate("Home")
             } catch (error) {
+                setLoading(false)
                 console.error('Error adding user:', error);
             }
         } catch (validationError) {
@@ -141,7 +145,9 @@ const Signup = () => {
             }
             setErrors(formErrors);
         }
+        setLoading(false)
     };
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
 
@@ -177,7 +183,7 @@ const Signup = () => {
                         </Text>
                         {
                             userImg ? (
-                                <View style={{ alignSelf: 'center', marginBottom: 0, }}>
+                                <View style={{ alignSelf: 'center', marginBottom:errors ? 70 : 0, }}>
                                     <View style={{ height: 110, width: 110, borderColor: colors.Primary, borderWidth: 3, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
                                         <Image source={{ uri: userImg }} style={{ height: 100, width: 100, resizeMode: 'cover', borderRadius: 100 }} />
                                         <TouchableOpacity

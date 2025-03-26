@@ -8,7 +8,7 @@ export const authSlice = createSlice({
         adduser: {}, // 
         userImg: null, 
         userProfile: {},
-        coin:null
+        userId:null,
     },
     reducers: {
         setAuthdata(state, action) {
@@ -27,15 +27,13 @@ export const authSlice = createSlice({
         setUserImg(state, action) {
             state.userImg = action.payload; 
         },
-        setProfile(state, action) {
-            state.userProfile = action.payload;
+        setUserId(state, action) {
+            state.userId = action.payload;
         },
-        setCoin(state, action) {
-            state.coin = action.payload
-        }
+       
     },
 });
 
-export const { setAuthdata, logout, setUser, setUserImg, setProfile, setCoin } = authSlice.actions;
+export const { setAuthdata, logout, setUser, setUserImg, setProfile,setUserId } = authSlice.actions;
 
 export default authSlice.reducer;

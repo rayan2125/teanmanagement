@@ -14,9 +14,11 @@ import CustomBtn from '../../components/customBtn';
 
 import { db } from '../../firebase/firebaseconfig';
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { useDispatch } from 'react-redux';
+import { setUser, setUserId } from '../../redux/Reducers/auth.redux';
 const Login = () => {
     const navigation = useNavigation();
-    //   const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const customTheme = {
         ...DefaultTheme,
         roundness: 25,
@@ -47,19 +49,23 @@ const Login = () => {
         try {
 
             const usersRef = collection(db, 'users');
-            console.log("userr:::", useState)
+
             // Query Firestore to check if user exists
             const q = query(usersRef, where('email', '==', email));
             const querySnapshot = await getDocs(q);
-
+            console.log(querySnapshot)
             if (querySnapshot.empty) {
                 console.log('User not found');
                 alert('User does not exist. Please sign up.');
             } else {
-                console.log('User exists:', querySnapshot.docs[0].data());
+                const userData = querySnapshot.docs[0].data();
+                const userId = querySnapshot.docs[0].id;
+                // console.log('User exists:', querySnapshot.docs[0].data());
                 alert('Login successful!');
-                // Navigate to Home screen or save user session
+                dispatch(setUserId(userId));
+               dispatch(setUser(userData));
                 navigation.navigate('Home');
+
             }
         } catch (error) {
             console.error('Error checking user:', error);
