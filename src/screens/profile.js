@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 // import { logout } from '@/redux/Reducers/profileReducers';
 
 const Profile = () => {
-    const dispatch= useDispatch()
+    const dispatch = useDispatch()
     // const profileSelector = useSelector(state=>state?.profile?.authData?.user)
 
     const navigation = useNavigation();
@@ -63,7 +63,7 @@ const Profile = () => {
                 <CustomBtn
                     bg="#F75851"
                     title="Logout"
-                onPress={()=>handleLogout()}
+                    onPress={() => handleLogout()}
                 />
             </View>
         </SafeAreaView>

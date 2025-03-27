@@ -53,7 +53,7 @@ const Signup = () => {
     const [phone, setPhone] = useState('');
     const [status, setStatus] = useState('');
     const [errors, setErrors] = useState({});
-    console.log(!errors)
+
     const [openModal, setModal] = useState(false)
     const navigation = useNavigation();
     const handleNavigation = () => {
@@ -120,7 +120,7 @@ const Signup = () => {
                     email,
                     phone,
                 })
-                
+
                 let data = { name, email, phone, userName }
 
                 dispatch(setUser(data))
@@ -183,7 +183,7 @@ const Signup = () => {
                         </Text>
                         {
                             userImg ? (
-                                <View style={{ alignSelf: 'center', marginBottom:errors ? 70 : 0, }}>
+                                <View style={{ alignSelf: 'center', marginBottom: errors ? 70 : 0, }}>
                                     <View style={{ height: 110, width: 110, borderColor: colors.Primary, borderWidth: 3, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
                                         <Image source={{ uri: userImg }} style={{ height: 100, width: 100, resizeMode: 'cover', borderRadius: 100 }} />
                                         <TouchableOpacity

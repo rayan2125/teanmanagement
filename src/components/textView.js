@@ -2,14 +2,19 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../constants/colors'
 import { useSelector } from 'react-redux';
+import { Icon } from 'react-native-paper';
 
-const TextView = ({ member, index, createById }) => {
-    // console.log("my member coming::",member)
+const TextView = ({ member, index, createById,onRemove }) => {
+    // console.log("my member coming::", member.status)
     const userImg = useSelector(state => state.auth.userImg);
     const authData = useSelector(state => state.auth.adduser);
     const userId = useSelector(state => state.auth.userId)
-    console.log(member.id == createById)
-    let dynaColor = member.status === "accepted" ? colors.orgbtn : member.status === "rejected" ? colors.redbtn : '#B0BDCD'
+    // const showDeleteButton = (member.id !== createById && userId !== member.id) || userId === member.id;
+    const showDeleteButton = (userId === createById && member.id !== userId) || (userId === member.id);
+    // const showDeleteButton = (createById && userId !== member.id) 
+    // const showDeleteButton = !(index === 0) || member.id===userId ;
+    let dynaColor = member.status === "accepted" ? colors.orgbtn : member.status === "declined" ? colors.redbtn : '#B0BDCD';
+    const boderColor = colors.greenbtn && member.status === "accepted" ? colors.greenbtn : member.status === "declined" ? colors.redbtn : '#B0BDCD'
     return (
         <>
             <View style={styles.playerHeader}>
@@ -27,7 +32,7 @@ const TextView = ({ member, index, createById }) => {
                     }}>
                         <Text style={styles.inviteText}>{
                             member.status === "accepted" ? "Accepted" :
-                                member.status === "rejected" ? 'Declined' : 'User Id: Invited'
+                                member.status === "declined" ? 'Declined' : 'User Id: Invited'
                         } </Text>
                     </View>}
                 </View>
@@ -40,7 +45,7 @@ const TextView = ({ member, index, createById }) => {
                 </TouchableOpacity>
 
             </View>
-            <View style={{ borderColor: '#ccc', borderWidth: 1.5, borderRadius: 10, height: 70, paddingHorizontal: 5, paddingVertical: 5 }}>
+            <View style={{ borderColor: boderColor, borderWidth: 1.5, borderRadius: 10, height: 70, paddingHorizontal: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 5 }}>
                 <View style={{ flexDirection: 'row', position: 'relative' }}>
 
                     <View>
@@ -51,16 +56,39 @@ const TextView = ({ member, index, createById }) => {
                             <Text style={{ color: colors.white }}>C</Text>
                         </View>}
                     </View>
-                    <View style={{ marginHorizontal: 10, justifyContent: 'center', }}>
+                    <View style={{ marginHorizontal: 10, justifyContent: 'center', flexDirection: 'row' }}>
+                        <View>
 
-                        <Text style={{ fontSize: 18, fontWeight: '500', marginBottom: 10 }}>{member?.name}{member?.id === userId ? `(You)` : ''}</Text>
+                            <Text style={{ fontSize: 18, fontWeight: '500', marginBottom: 10 }}>{member?.name}{member?.id === userId ? `(You)` : ''}</Text>
 
-                        {
-                            <Text>@{member?.userName}</Text>
-                        }
-
+                            {
+                                <Text>@{member?.userName}</Text>
+                            }
+                        </View>
                     </View>
                 </View>
+
+                {
+                    // (member.id === userId && index !== 0) 
+                    // member.id !==createById &&
+                    // index !==0 && 
+                    // member.id ===userId
+                    // && 
+                    showDeleteButton && index !== 0 &&
+                    (
+
+                        <TouchableOpacity style={{ marginRight: 10 }}
+                        onPress={onRemove}
+                        >
+                            <Icon
+                                source="delete-outline"
+                                color={colors.text}
+                                size={25}
+                            />
+                        </TouchableOpacity>
+                    )}
+
+
 
             </View>
         </>

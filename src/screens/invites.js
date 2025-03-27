@@ -16,12 +16,12 @@ const Invites = () => {
                 const invitesRef = collection(db, "teamInvites");
                 const q = query(invitesRef, where("playerId", "==", userId), where("status", "==", "pending"));
                 const querySnapshot = await getDocs(q);
-    
+
                 const invitesData = [];
                 querySnapshot.forEach((doc) => {
                     invitesData.push({ id: doc.id, ...doc.data() });
                 });
-    
+
                 setInvites(invitesData);
             } catch (error) {
                 console.error("Error fetching invites:", error);
@@ -29,10 +29,10 @@ const Invites = () => {
                 setLoading(false);
             }
         };
-    
+
         fetchInvites();
     }, [userId]);
-    
+
 
     // Accept Invitation
     const handleAccept = async (inviteId) => {

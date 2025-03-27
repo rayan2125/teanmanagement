@@ -20,8 +20,8 @@ const RootNavigation = () => {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Registration" component={Registration} />
             <Stack.Screen name="Profile" component={Profile} />
-            <Stack.Screen name="Invites" component={Invites}/>
-            <Stack.Screen name="TeamMembers" component={TeamMembers}/>
+            <Stack.Screen name="Invites" component={Invites} />
+            <Stack.Screen name="TeamMembers" component={TeamMembers} />
         </Stack.Navigator>
     )
 }

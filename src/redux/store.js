@@ -14,6 +14,7 @@ import {
 import authRedux from './Reducers/auth.redux';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import teamRedux from './Reducers/teamsRedux';
 
 const persistConfig = {
     key: 'root',
@@ -22,7 +23,7 @@ const persistConfig = {
 }
 const reducer = combineReducers({
     auth: authRedux,
-    // cart: cartRedux
+    member: teamRedux,
 })
 
 const persistReducers = persistReducer(persistConfig, reducer)
